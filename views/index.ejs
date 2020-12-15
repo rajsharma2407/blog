@@ -1,0 +1,27 @@
+<%- include('header') %> 
+    <div class="container">
+        <h1 class="my-3">Blog</h1>
+        <a href="/blog/add" class="btn btn-primary my-3">Add a Blog</a>
+        <% blogs.forEach(blog=>{%> 
+        <div class="card mb-3">
+            <div class="card-body">
+                <h3 class="card-title">
+                    <%= blog.title %> 
+                </h3>
+                <p class="text-muted"><%= blog.createdAt.toLocaleString() %> </p>
+                <p class="card-text" style="overflow: hidden;max-height:50px;">
+                    <%= blog.description %> 
+                </p>
+                <div class="d-inline-flex">
+
+                    <form action="/blog/<%= blog.id %>?_method=DELETE" method="POST">
+                        <a href="/blog/<%= blog.slug %> " class="btn btn-primary">Read More </a>
+                        <a href="/blog/update/<%= blog.slug %> " class="btn btn-info">Edit Blog </a>
+                        <button type="submit" class="btn btn-danger">Remove</button>
+                    </form>
+                </div>
+            </div>
+        </div>            
+        <% }) %> 
+    </div>
+    <%- include('footer') %> 

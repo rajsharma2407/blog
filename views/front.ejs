@@ -1,0 +1,49 @@
+<%- include('header') %> 
+    <div class="container">
+        <h1 class="my-3 mr-auto" onmousedown="return false">Blog</h1>
+        <input type="text" class="float-right mb-3 rounded" placeholder="search" id="search">
+        <% blogs.forEach(blog=>{%> 
+        <div class="card mb-3" style="clear: both;">
+            <div class="card-body">
+                <h3 class="card-title">
+                    <%= blog.title %> 
+                </h3>
+                <p class="text-muted"><%= blog.createdAt.toLocaleString() %> </p>
+                <p class="card-text" style="overflow: hidden;max-height:50px;">
+                    <%= blog.description %> 
+                </p>
+                <form action="/blog/<%= blog.id %>?_method=DELETE" method="POST">
+                    <a href="/blog/<%= blog.slug %> " class="btn btn-primary">Read More </a>
+                </form>
+            </div>
+        </div>            
+        <% }) %> 
+    </div>
+    <script>
+        var search = document.getElementById('search');
+        var title = document.querySelectorAll('h3');
+        console.log(title)
+        var val = 1;
+        search.addEventListener("keyup",function(e){
+            var value = search.value.toLowerCase();
+            title.forEach(card=>{
+                if(x = card.innerText.toLowerCase().indexOf(value)>-1){
+                    ((card.parentElement).parentElement).style.display = "block";
+                }else{
+                    card.parentElement.parentElement.style.display = "none";
+                }
+            })
+            
+            if (x == false && val <=1){
+                    var h3 = document.createElement('h3');
+                    h3.className ="text-center"
+                    h3.style.clear = 'both'
+                    h3.innerText="No results Found";
+                    document.getElementsByClassName('container')[0].appendChild(h3);
+                    val++;
+                }else{
+                    document.getElementsByClassName('container')[0].removeChild(h3);
+                }
+        })
+    </script>
+    <%- include('footer') %> 

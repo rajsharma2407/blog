@@ -1,0 +1,19 @@
+<%- include('header') %> 
+<div class="container my-5">
+    <a href="/blog" class="btn btn-primary mb-5">All Blogs</a>
+    <form action="/blog/add" method="POST">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" name="title">
+            </div>
+            
+            <div class="form-group">
+                <label for="desc">Description</label>
+                <textarea name="description" id="desc" cols="30" rows="10" class="form-control"></textarea>
+            </div>
+            <a href="/" class="btn btn-danger">Cancel</a>
+            <input type="submit" value="Save" class="btn btn-success">
+        </form>
+    </div>
+
+<%- include('footer') %> 
